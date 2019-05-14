@@ -18,9 +18,14 @@ func (t *Template) Render(w io.Writer, name string, data interface{}, c echo.Con
 	return t.templates.ExecuteTemplate(w, name, data)
 }
 
+// refs: https://stackoverflow.com/questions/18175630/go-template-executetemplate-include-html
+func noescape(str string) template.HTML {
+	return template.HTML(str)
+}
+
 func main() {
 	t := &Template{
-		templates: template.Must(template.ParseGlob("public/views/*.html")),
+		templates: template.Must(template.New("main").Funcs(template.FuncMap{"noescape": noescape}).ParseGlob("public/views/*.html")),
 	}
 
 	e := echo.New()

@@ -10,7 +10,11 @@
 </head>
 
 <body>
-    {{.}}
+    {{ range .Posts }}
+    <div>
+        {{ noescape .Content }}
+    </div>
+    {{ end }}
     <form action="/post" method="post">
         <label for="content">content:</label>
         <input type="text" name="content" id="content">

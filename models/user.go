@@ -1,9 +1,5 @@
 package models
 
-import (
-	_ "github.com/mattn/go-sqlite3"
-)
-
 type User struct {
 	Id   string `db:"id"`
 	Pass string `db:"pass"`

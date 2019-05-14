@@ -1,11 +1,10 @@
 package controllers
 
 import (
-	"database/sql"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo-contrib/session"
+	"github.com/proelbtn/kosen-isec-lab-vulnerable-chat-app/models"
 	"net/http"
-	"time"
 )
 
 func PostPostHandler(c echo.Context) error {
@@ -19,24 +18,17 @@ func PostPostHandler(c echo.Context) error {
 		return err
 	}
 
-	db, err := sql.Open("sqlite3", "file:database.sqlite3")
-	if err != nil {
-		return err
-	}
-
 	id, ok := sess.Values["id"]
 	if !ok {
 		return err
 	}
-
-	content := params.Get("content")
-	createdAt := time.Now()
-
 	if id == nil {
 		return c.Redirect(http.StatusSeeOther, "/")
 	}
 
-	_, err = db.Exec("INSERT INTO posts (uid, content, created_at) VALUES (?, ?, ?)", id, content, createdAt)
+	content := params.Get("content")
+
+	err = models.CreatePost(id.(string), content)
 
 	// TODO: better error handling
 	if err != nil {
