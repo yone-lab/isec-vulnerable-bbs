@@ -31,7 +31,7 @@ func LoginPostHandler(c echo.Context) error {
 	}
 
 	if user.Pass == pass {
-		sess.Values["id"] = user.Id
+		sess.Values["id"] = user.ID
 		sess.Save(c.Request(), c.Response())
 		return c.Redirect(http.StatusSeeOther, "/")
 	}

@@ -4,6 +4,7 @@ import (
 	"github.com/gorilla/sessions"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo-contrib/session"
+	"github.com/labstack/echo/middleware"
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/proelbtn/kosen-isec-lab-vulnerable-chat-app/controllers"
 	"html/template"
@@ -29,8 +30,10 @@ func main() {
 	}
 
 	e := echo.New()
+	e.Debug = true
 	e.Renderer = t
 
+	e.Use(middleware.Logger())
 	e.Use(session.Middleware(sessions.NewCookieStore([]byte("secret"))))
 
 	e.GET("/", controllers.IndexGetHandler)
@@ -40,6 +43,5 @@ func main() {
 	e.POST("/signup", controllers.SignupPostHandler)
 	e.POST("/post", controllers.PostPostHandler)
 
-	e.Debug = true
 	e.Logger.Fatal(e.Start(":8080"))
 }

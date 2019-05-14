@@ -1,9 +1,9 @@
 package models
 
 type User struct {
-	Id   string `db:"id"`
-	Pass string `db:"pass"`
-	Name string `db:"display_name"`
+	ID   string
+	Pass string
+	Name string
 }
 
 func CreateUser(id, pass, name string) error {
@@ -26,8 +26,8 @@ func SearchUser(id string) (*User, error) {
 		return nil, err
 	}
 
-	row := db.QueryRow("SELECT * FROM users WHERE id = ?", id)
-	row.Scan(user)
+	row := db.QueryRow("SELECT id, pass, display_name FROM users WHERE id = ?", id)
+	row.Scan(&user.ID, &user.Pass, &user.Name)
 
 	return &user, nil
 }

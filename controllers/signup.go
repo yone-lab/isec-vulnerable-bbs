@@ -29,6 +29,7 @@ func SignupPostHandler(c echo.Context) error {
 
 	// TODO: better error handling
 	if err != nil {
+		println(err.Error())
 		return c.Render(http.StatusNotAcceptable, "signup", nil)
 	}
 

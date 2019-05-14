@@ -5,10 +5,10 @@ import (
 )
 
 type Post struct {
-	ID        int       `db:"id"`
-	UID       string    `db:"uid"`
-	Content   string    `db:"content"`
-	CreatedAt time.Time `db:"created_at"`
+	ID        int
+	UID       string
+	Content   string
+	CreatedAt time.Time
 }
 
 func CreatePost(uid, content string) error {
@@ -20,7 +20,7 @@ func CreatePost(uid, content string) error {
 	now := time.Now()
 
 	// TODO: raw password
-	_, err = db.Exec("INSERT INTO users (uid, content, created_at) VALUES (?, ?, ?)", uid, content, now)
+	_, err = db.Exec("INSERT INTO posts (uid, content, created_at) VALUES (?, ?, ?)", uid, content, now)
 
 	return err
 }
