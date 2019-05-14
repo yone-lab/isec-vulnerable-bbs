@@ -3,7 +3,7 @@ package controllers
 import (
 	"github.com/labstack/echo"
 	"github.com/labstack/echo-contrib/session"
-	"github.com/proelbtn/kosen-isec-lab-vulnerable-chat-app/models"
+	"github.com/proelbtn/vulnerable-bss/models"
 	"net/http"
 )
 
