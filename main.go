@@ -33,6 +33,8 @@ func main() {
 	e.Debug = true
 	e.Renderer = t
 
+	e.Static("/static", "assets")
+
 	e.Use(middleware.Logger())
 	e.Use(session.Middleware(sessions.NewCookieStore([]byte("secret"))))
 
