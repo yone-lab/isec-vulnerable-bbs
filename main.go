@@ -6,7 +6,7 @@ import (
 	"github.com/labstack/echo-contrib/session"
 	"github.com/labstack/echo/middleware"
 	_ "github.com/mattn/go-sqlite3"
-	"github.com/proelbtn/vulnerable-bss/controllers"
+	"github.com/proelbtn/vulnerable-bbs/controllers"
 	"html/template"
 	"io"
 )

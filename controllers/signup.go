@@ -3,7 +3,7 @@ package controllers
 import (
 	"github.com/labstack/echo"
 	"github.com/labstack/echo-contrib/session"
-	"github.com/proelbtn/vulnerable-bss/models"
+	"github.com/proelbtn/vulnerable-bbs/models"
 	"net/http"
 )
 

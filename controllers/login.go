@@ -3,7 +3,7 @@ package controllers
 import (
 	"github.com/labstack/echo"
 	"github.com/labstack/echo-contrib/session"
-	"github.com/proelbtn/vulnerable-bss/models"
+	"github.com/proelbtn/vulnerable-bbs/models"
 	"net/http"
 )
 
@@ -29,6 +29,8 @@ func LoginPostHandler(c echo.Context) error {
 	if err != nil {
 		return c.Render(http.StatusNotAcceptable, "login", nil)
 	}
+
+	println(user.Pass, pass)
 
 	if user.Pass == pass {
 		sess.Values["id"] = user.ID

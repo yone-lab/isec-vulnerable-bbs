@@ -6,14 +6,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!-- using css framework Pure --> 
-    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+    <!-- using css framework Pure -->
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css"
+        integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/static/base.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>BBS</title>
 </head>
 
 <body>
+    <h2>welcome to {{ .User.Name }}</h2>
     {{ range .Posts }}
     <div>
         {{ noescape .Content }}
@@ -21,8 +23,8 @@
     {{ end }}
     <form action="/post" method="post" class="pure-skin-base pure-form pure-form-aligned">
         <div class="pure-control-group">
-        <label for="content">content:</label>
-        <input type="text" name="content" id="content">
+            <label for="content">content:</label>
+            <input type="text" name="content" id="content">
         </div>
         <div class="pure-controls">
             <button type="submit" class="pure-skin-base pure-button pure-button-primary">submit</button>
