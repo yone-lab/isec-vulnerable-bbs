@@ -11,3 +11,6 @@ RUN go get -v bitbucket.org/liamstask/goose/cmd/goose
 # 2. install echo
 
 RUN go get -v github.com/labstack/echo/...
+
+RUN go get -v github.com/gorilla/sessions
+RUN go get -v github.com/labstack/echo-contrib/session

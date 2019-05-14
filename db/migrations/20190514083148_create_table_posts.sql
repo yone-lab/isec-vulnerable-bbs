@@ -6,6 +6,7 @@ CREATE TABLE posts (
     id INTEGER NOT NULL,
     uid VARCHAR(255) NOT NULL,
     created_at DATETIME NOT NULL,
+    content VARCHAR(4095) NOT NULL,
     PRIMARY KEY(id),
     FOREIGN KEY(uid) REFERENCES users(id)
 );
