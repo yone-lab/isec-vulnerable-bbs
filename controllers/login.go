@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"database/sql"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo-contrib/session"
 	"github.com/proelbtn/kosen-isec-lab-vulnerable-chat-app/models"
@@ -23,22 +22,15 @@ func LoginPostHandler(c echo.Context) error {
 		return err
 	}
 
-	db, err := sql.Open("sqlite3", "file:database.sqlite3")
-	if err != nil {
-		return err
-	}
-
 	id, pass := params.Get("id"), params.Get("pass")
-
-	rows, err := db.Query("SELECT * FROM users WHERE id = ? AND pass = ?", id, pass)
+	user, err := models.SearchUser(id)
 
 	// TODO: better error handling
 	if err != nil {
 		return c.Render(http.StatusNotAcceptable, "login", nil)
 	}
 
-	var user models.User
-	if rows.Scan(user) != nil && !rows.Next() {
+	if user.Pass == pass {
 		sess.Values["id"] = user.Id
 		sess.Save(c.Request(), c.Response())
 		return c.Redirect(http.StatusSeeOther, "/")

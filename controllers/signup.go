@@ -1,9 +1,9 @@
 package controllers
 
 import (
-	"database/sql"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo-contrib/session"
+	"github.com/proelbtn/kosen-isec-lab-vulnerable-chat-app/models"
 	"net/http"
 )
 
@@ -22,15 +22,10 @@ func SignupPostHandler(c echo.Context) error {
 		return err
 	}
 
-	db, err := sql.Open("sqlite3", "file:database.sqlite3")
-	if err != nil {
-		return err
-	}
-
 	id, pass, name := params.Get("id"), params.Get("pass"), params.Get("name")
 
 	// TODO: raw password
-	_, err = db.Exec("INSERT INTO users VALUES (?, ?, ?)", id, pass, name)
+	err = models.CreateUser(id, pass, name)
 
 	// TODO: better error handling
 	if err != nil {
