@@ -21,14 +21,19 @@ func main() {
 	}
 
 	e := echo.New()
+	e.Debug = true
 	e.Renderer = t
 
 	e.GET("/", func(c echo.Context) error {
-		err := c.Render(http.StatusOK, "index", 0)
-		if err != nil {
-			println(err.Error())
-		}
-		return err
+		return c.Render(http.StatusOK, "index", nil)
+	})
+
+	e.GET("/login", func(c echo.Context) error {
+		return c.Render(http.StatusOK, "login", nil)
+	})
+
+	e.GET("/signup", func(c echo.Context) error {
+		return c.Render(http.StatusOK, "signup", nil)
 	})
 
 	e.Logger.Fatal(e.Start(":8080"))

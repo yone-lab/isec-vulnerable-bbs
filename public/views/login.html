@@ -1,0 +1,23 @@
+{{define "login"}}
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+</head>
+
+<body>
+    <form action="/login" method="post">
+        <label for="id">id:</label>
+        <input type="text" name="id" id="id">
+        <label for="pass">pass:</label>
+        <input type="password" name="pass" id="pass">
+        <input type="submit" value="login">
+    </form>
+</body>
+
+</html>
+{{end}}
