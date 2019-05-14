@@ -6,4 +6,8 @@ RUN apt update && \
 
 # 1. install goose
 
-RUN go get bitbucket.org/liamstask/goose/cmd/goose
+RUN go get -v bitbucket.org/liamstask/goose/cmd/goose
+
+# 2. install echo
+
+RUN go get -v github.com/labstack/echo/...

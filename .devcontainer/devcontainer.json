@@ -1,4 +1,9 @@
 {
     "context": ".",
     "dockerFile": "Dockerfile",
+    "appPort": 8080,
+    "extensions": [
+        "ms-vscode.go",
+        "eamodio.gitlens",
+    ]
 }
