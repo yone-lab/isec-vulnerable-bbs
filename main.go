@@ -1,9 +1,11 @@
 package main
 
 import (
+	"database/sql"
 	"github.com/gorilla/sessions"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo-contrib/session"
+	_ "github.com/mattn/go-sqlite3"
 	"html/template"
 	"io"
 	"net/http"
@@ -34,8 +36,8 @@ func main() {
 			return err
 		}
 
-		if val := sess.Values["id"]; val != nil {
-			c.Render(http.StatusOK, "bulletin", nil)
+		if id := sess.Values["id"]; id != nil {
+			return c.Render(http.StatusOK, "bbs", nil)
 		}
 
 		return c.Render(http.StatusOK, "index", nil)
@@ -50,14 +52,34 @@ func main() {
 	})
 
 	e.POST("/signup", func(c echo.Context) error {
-		_, err := c.FormParams()
+		sess, err := session.Get("session", c)
 		if err != nil {
 			return err
 		}
 
-		//id, pass, name := params.Get("id"), params.Get("pass"), params.Get("name")
+		params, err := c.FormParams()
+		if err != nil {
+			return err
+		}
 
-		return nil
+		db, err := sql.Open("sqlite3", "file:database.sqlite3")
+		if err != nil {
+			return err
+		}
+
+		id, pass, name := params.Get("id"), params.Get("pass"), params.Get("name")
+
+		_, err = db.Exec("INSERT INTO users VALUES (?, ?, ?)", id, pass, name)
+
+		// TODO: better error handling
+		if err != nil {
+			return c.Render(http.StatusNotAcceptable, "signup", nil)
+		}
+
+		sess.Values["id"] = id
+		sess.Save(c.Request(), c.Response())
+
+		return c.Redirect(http.StatusSeeOther, "/")
 	})
 
 	e.Logger.Fatal(e.Start(":8080"))
