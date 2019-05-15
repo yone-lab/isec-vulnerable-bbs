@@ -17,7 +17,7 @@
 <body>
     <h2>welcome to {{ .User.Name }}</h2>
     {{ range .Posts }}
-    <div>
+    <div class="pure-skin-base pure-post">
         {{ noescape .Content }}
     </div>
     {{ end }}
