@@ -958,3 +958,14 @@ margin: 7px 2px;
 }
 /* end from menu-responsive.css ******************/
 
+.pure-skin-base.pure-post {
+    border: solid 1px rgb(200, 233, 229);
+    border-style: solid none none;
+    /* background: #CDDDDB */
+    padding: 2px;
+    margin: 2.5px;
+}
+
+.pure-skin-base.pure-post:last-of-type {
+    border-style: solid none;
+}
